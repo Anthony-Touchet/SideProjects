@@ -38,6 +38,8 @@
             this.contactName = new System.Windows.Forms.RichTextBox();
             this.contactNumber = new System.Windows.Forms.RichTextBox();
             this.addNumber = new System.Windows.Forms.Button();
+            this.numberLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,11 +133,31 @@
             this.addNumber.Text = "Add Number";
             this.addNumber.UseVisualStyleBackColor = true;
             // 
+            // numberLabel
+            // 
+            this.numberLabel.AutoSize = true;
+            this.numberLabel.Location = new System.Drawing.Point(382, 114);
+            this.numberLabel.Name = "numberLabel";
+            this.numberLabel.Size = new System.Drawing.Size(44, 13);
+            this.numberLabel.TabIndex = 8;
+            this.numberLabel.Text = "Number";
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(80, 114);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(35, 13);
+            this.nameLabel.TabIndex = 9;
+            this.nameLabel.Text = "Name";
+            // 
             // Log
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(648, 491);
+            this.Controls.Add(this.nameLabel);
+            this.Controls.Add(this.numberLabel);
             this.Controls.Add(this.addNumber);
             this.Controls.Add(this.contactNumber);
             this.Controls.Add(this.contactName);
@@ -166,6 +188,8 @@
         private System.Windows.Forms.RichTextBox contactName;
         private System.Windows.Forms.RichTextBox contactNumber;
         private System.Windows.Forms.Button addNumber;
+        private System.Windows.Forms.Label numberLabel;
+        private System.Windows.Forms.Label nameLabel;
     }
 }
 

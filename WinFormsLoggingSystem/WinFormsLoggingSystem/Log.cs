@@ -20,6 +20,7 @@ namespace WinFormsLoggingSystem
         public Log()
         {
             InitializeComponent();
+            info.instance.ReadContacts(Environment.CurrentDirectory + "/Contacts.xml");
             Open_Log(null, null);
         }
 
@@ -39,34 +40,46 @@ namespace WinFormsLoggingSystem
 
         private void Open_Contacts(object sender, EventArgs e)
         {
+            //Log Window
             saveButton.Visible = false;
             loadButton.Visible = false;
             LogBox.Visible = false;
+
+            //Contact Window
             saveContact.Visible = true;
             addNumber.Visible = true;
             contactNumber.Visible = true;
             contactName.Visible = true;
+            nameLabel.Visible = true;
+            numberLabel.Visible = true;
         }
 
         private void Open_Log(object sender, EventArgs e)
         {
+            //Log Window
+            LogBox.Visible = true;
             saveButton.Visible = true;
             loadButton.Visible = true;
+
+            //Contact Window
             saveContact.Visible = false;
-            LogBox.Visible = true;
             addNumber.Visible = false;
             contactNumber.Visible = false;
             contactName.Visible = false;
+            nameLabel.Visible = false;
+            numberLabel.Visible = false;
         }
 
         private void Save_Contact(object sender, EventArgs e)
         {
-            if(!info.instance.AddContact(contactName.Text, contactNumber.Text))
+            if (!info.instance.AddContact(contactName.Text, contactNumber.Text))
                 MessageBox.Show("Contact Already Exists.");
-            else
-                MessageBox.Show("Contact Saved!");
 
-            info.instance.SaveContacts(info.instance.GetContacts(), Environment.CurrentDirectory + "/Contacts.xml");
+            else
+            {
+                MessageBox.Show("Contact Saved!");
+                info.instance.SaveContacts(info.instance.GetContacts(), Environment.CurrentDirectory + "/Contacts.xml");
+            }        
         }
     }
 }

@@ -62,9 +62,9 @@ namespace Info
             }
         }
 
-        public Dictionary<string, string> ReadContacts(string file)
+        public void ReadContacts(string file)
         {
-            var contacts = new Dictionary<string, string>();
+            var Tempcontacts = new Dictionary<string, string>();
             using (FileStream fs = File.OpenRead(file))
             using (BinaryReader reader = new BinaryReader(fs))
             {
@@ -75,7 +75,7 @@ namespace Info
                     string value = reader.ReadString();
                     contacts.Add(key, value);
                 }
-                return contacts;
+                this.instance.contacts = Tempcontacts;
             }
         }
 
