@@ -39,6 +39,7 @@ namespace WinFormsLoggingSystem
 
         private void Open_Contacts(object sender, EventArgs e)
         {
+            info.instance.ReadContacts(Environment.CurrentDirectory + "/Contacts.xml");
             //Log Window
             saveButton.Visible = false;
             loadButton.Visible = false;
@@ -51,6 +52,8 @@ namespace WinFormsLoggingSystem
             contactName.Visible = true;
             nameLabel.Visible = true;
             numberLabel.Visible = true;
+            contactInfo.Visible = true;
+            contactLabel.Visible = true;
         }
 
         private void Open_Log(object sender, EventArgs e)
@@ -67,6 +70,8 @@ namespace WinFormsLoggingSystem
             contactName.Visible = false;
             nameLabel.Visible = false;
             numberLabel.Visible = false;
+            contactInfo.Visible = false;
+            contactLabel.Visible = false;
         }
 
         private void Save_Contact(object sender, EventArgs e)

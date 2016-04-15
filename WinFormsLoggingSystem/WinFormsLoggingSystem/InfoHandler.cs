@@ -21,7 +21,7 @@ namespace Info
             }
         }
 
-        Dictionary<string, List<string>> contacts;    //People as the Key, and they're Numbers as their values
+        public Dictionary<string, List<string>> contacts;    //People as the Key, and they're Numbers as their values
 
         public InfoHandler()
         {

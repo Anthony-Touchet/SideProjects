@@ -40,6 +40,8 @@
             this.addNumber = new System.Windows.Forms.Button();
             this.numberLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
+            this.contactLabel = new System.Windows.Forms.Label();
+            this.contactInfo = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,11 +168,30 @@
             this.nameLabel.TabIndex = 9;
             this.nameLabel.Text = "Name";
             // 
+            // contactLabel
+            // 
+            this.contactLabel.AutoSize = true;
+            this.contactLabel.Location = new System.Drawing.Point(110, 388);
+            this.contactLabel.Name = "contactLabel";
+            this.contactLabel.Size = new System.Drawing.Size(97, 17);
+            this.contactLabel.TabIndex = 10;
+            this.contactLabel.Text = "Contact Name";
+            // 
+            // contactInfo
+            // 
+            this.contactInfo.Location = new System.Drawing.Point(226, 388);
+            this.contactInfo.Multiline = true;
+            this.contactInfo.Name = "contactInfo";
+            this.contactInfo.Size = new System.Drawing.Size(229, 88);
+            this.contactInfo.TabIndex = 11;
+            // 
             // Log
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 604);
+            this.Controls.Add(this.contactInfo);
+            this.Controls.Add(this.contactLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.numberLabel);
             this.Controls.Add(this.addNumber);
@@ -206,6 +227,8 @@
         private System.Windows.Forms.Button addNumber;
         private System.Windows.Forms.Label numberLabel;
         private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label contactLabel;
+        private System.Windows.Forms.TextBox contactInfo;
     }
 }
 
