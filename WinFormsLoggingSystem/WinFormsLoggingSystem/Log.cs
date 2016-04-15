@@ -20,7 +20,6 @@ namespace WinFormsLoggingSystem
         public Log()
         {
             InitializeComponent();
-            info.instance.ReadContacts(Environment.CurrentDirectory + "/Contacts.xml");
             Open_Log(null, null);
         }
 
@@ -80,6 +79,18 @@ namespace WinFormsLoggingSystem
                 MessageBox.Show("Contact Saved!");
                 info.instance.SaveContacts(info.instance.GetContacts(), Environment.CurrentDirectory + "/Contacts.xml");
             }        
+        }
+
+        private void Add_Number(object sender, EventArgs e)
+        {
+            if (info.instance.AddNumer(contactName.Text, contactNumber.Text))
+            {
+                MessageBox.Show("Contact now has this number as well.");
+                info.instance.SaveContacts(info.instance.GetContacts(), Environment.CurrentDirectory + "/Contacts.xml");
+            }
+                
+            else
+                MessageBox.Show("Can't add number. Either contact exists or number already entered.");
         }
     }
 }

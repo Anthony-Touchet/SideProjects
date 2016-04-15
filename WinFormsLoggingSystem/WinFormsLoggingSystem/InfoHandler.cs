@@ -21,18 +21,20 @@ namespace Info
             }
         }
 
-        Dictionary<string, string> contacts;    //People as the Key, and they're Numbers as their values
+        Dictionary<string, List<string>> contacts;    //People as the Key, and they're Numbers as their values
 
         public InfoHandler()
         {
-            contacts = new Dictionary<string, string>();
+            contacts = new Dictionary<string, List<string>>();
         }
 
         public bool AddContact(string name, string value)   //Add a contact To the Dictonary
         {
             if(!contacts.ContainsKey(name))
             {
-                contacts.Add(name, value);
+                List<string> tempList = new List<string>();
+                tempList.Add(value);
+                contacts.Add(name, tempList);
                 return true;
             }
             return false;
@@ -42,13 +44,20 @@ namespace Info
         {
             if(contacts.ContainsKey(name))
             {
-                contacts[name] += value;
+                foreach(string s in contacts[name])
+                {
+                    if(s == value)
+                    {
+                        return false;
+                    }
+                }
+                contacts[name].Add(value);
                 return true;
             }
             return false;
         }
 
-        public void SaveContacts(Dictionary<string, string> contacts, string file)
+        public void SaveContacts(Dictionary<string, List<string>> contacts, string file)
         {
             using (FileStream fs = File.OpenWrite(file))
             using (BinaryWriter writer = new BinaryWriter(fs))
@@ -57,29 +66,39 @@ namespace Info
                 foreach(var cont in contacts)
                 {
                     writer.Write(cont.Key);
-                    writer.Write(cont.Value);
+                    foreach(string s in cont.Value)
+                    {
+                        writer.Write(s);
+                    }
                 }
             }
         }
 
         public void ReadContacts(string file)
         {
-            var Tempcontacts = new Dictionary<string, string>();
+            var Tempcontacts = new Dictionary<string, List<string>>();
             using (FileStream fs = File.OpenRead(file))
             using (BinaryReader reader = new BinaryReader(fs))
             {
                 int count = reader.ReadInt32();
                 for(int i = 0; i < 0; i++)
                 {
+                    string tmepVal = "";
+                    List<string> tempList = new List<string>();
                     string key = reader.ReadString();
-                    string value = reader.ReadString();
-                    contacts.Add(key, value);
+                    char[] value = reader.ReadChars(count);
+                    foreach(char c in value)
+                    {
+                        tmepVal += c;                     
+                    }
+                    tempList.Add(tmepVal);
+                    contacts.Add(key, tempList);
                 }
                 this.instance.contacts = Tempcontacts;
             }
         }
 
-        public Dictionary<string, string> GetContacts()
+        public Dictionary<string, List<string>> GetContacts()
         {
             return contacts;
         }
