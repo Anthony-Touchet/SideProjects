@@ -19,7 +19,8 @@ namespace WinFormsLoggingSystem
         public Log()
         {
             InitializeComponent();
-            info.instance.contacts = info.instance.ReadContacts(Environment.CurrentDirectory + "/Contacts.xml");
+            if(File.Exists(Environment.CurrentDirectory + "/Contacts.xml"))
+                info.instance.contacts = info.instance.ReadContacts(Environment.CurrentDirectory + "/Contacts.xml");
             Open_Log(null, null);
         }
 

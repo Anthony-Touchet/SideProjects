@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace Info
 {
@@ -21,20 +22,20 @@ namespace Info
             }
         }
 
-        public Dictionary<string, List<string>> contacts;    //People as the Key, and they're Numbers as their values
+        public Dictionary<string, string> contacts;    //People as the Key, and they're Numbers as their values
 
         public InfoHandler()
         {
-            contacts = new Dictionary<string, List<string>>();
+            contacts = new Dictionary<string, string>();
         }
 
         public bool AddContact(string name, string value)   //Add a contact To the Dictonary
         {
             if(!contacts.ContainsKey(name))
             {
-                List<string> tempList = new List<string>();
-                tempList.Add(value);
-                contacts.Add(name, tempList);
+                string tempString = "";
+                tempString += value;
+                contacts.Add(name, tempString);
                 return true;
             }
             return false;
@@ -43,63 +44,49 @@ namespace Info
         public bool AddNumer(string name, string value) //Add a number to the contact
         {
             if(contacts.ContainsKey(name))
-            {
-                foreach(string s in contacts[name])
-                {
-                    if(s == value)
-                    {
-                        return false;
-                    }
-                }
-                contacts[name].Add(value);
+            {               
+                contacts[name] += value;
                 return true;
             }
             return false;
         }
 
-        public void SaveContacts(Dictionary<string, List<string>> contacts, string file)
+        public void SaveContacts(Dictionary<string, string> contacts, string file)
         {
             using (FileStream fs = File.OpenWrite(file))
             using (BinaryWriter writer = new BinaryWriter(fs))
             {
+                // Put count.
                 writer.Write(contacts.Count);
-                foreach(var cont in contacts)
+                // Write pairs.
+                foreach (var pair in contacts)
                 {
-                    writer.Write(cont.Key);
-                    foreach(string s in cont.Value)
-                    {
-                        writer.Write(s);
-                    }
+                    writer.Write(pair.Key);
+                    writer.Write(pair.Value);
                 }
             }
         }
 
-        public Dictionary<string, List<string>> ReadContacts(string file)
+        public Dictionary<string, string> ReadContacts(string file)
         {
-            //Dictionary<string, List<string>> Tempcontacts = new Dictionary<string, List<string>>();
-            //using (FileStream fs = File.OpenRead(file))
-            //using (BinaryReader reader = new BinaryReader(fs))
-            //{
-            //    int count = reader.ReadInt32();
-            //    for(int i = 0; i < count; i++)
-            //    {
-            //        string tmepVal = "";
-            //        List<string> tempList = new List<string>();
-            //        string key = reader.ReadString();
-            //        char[] value = reader.ReadChars(count);
-            //        foreach(char c in value)
-            //        {
-            //            tmepVal += c;                     
-            //        }
-            //        tempList.Add(tmepVal);
-            //        Tempcontacts.Add(key, tempList);
-            //    }
-            //    instance.contacts = Tempcontacts;
-            return instance.contacts;
-            //}
+            var result = new Dictionary<string, string>();
+            using (FileStream fs = File.OpenRead(file))
+            using (BinaryReader reader = new BinaryReader(fs))
+            {
+                // Get count.
+                int count = reader.ReadInt32();
+                // Read in all pairs.
+                for (int i = 0; i < count; i++)
+                {
+                    string key = reader.ReadString();
+                    string value = reader.ReadString();
+                    result[key] = value;
+                }
+            }
+            return result;
         }
 
-        public Dictionary<string, List<string>> GetContacts()
+        public Dictionary<string, string> GetContacts()
         {
             return contacts;
         }
