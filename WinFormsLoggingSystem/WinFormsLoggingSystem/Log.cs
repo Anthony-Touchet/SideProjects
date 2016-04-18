@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using System.IO;
 using Info;
 
@@ -20,6 +19,7 @@ namespace WinFormsLoggingSystem
         public Log()
         {
             InitializeComponent();
+            info.instance.contacts = info.instance.ReadContacts(Environment.CurrentDirectory + "/Contacts.xml");
             Open_Log(null, null);
         }
 
@@ -39,7 +39,6 @@ namespace WinFormsLoggingSystem
 
         private void Open_Contacts(object sender, EventArgs e)
         {
-            info.instance.ReadContacts(Environment.CurrentDirectory + "/Contacts.xml");
             //Log Window
             saveButton.Visible = false;
             loadButton.Visible = false;

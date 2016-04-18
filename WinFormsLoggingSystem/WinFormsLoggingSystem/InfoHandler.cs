@@ -74,28 +74,29 @@ namespace Info
             }
         }
 
-        public void ReadContacts(string file)
+        public Dictionary<string, List<string>> ReadContacts(string file)
         {
-            var Tempcontacts = new Dictionary<string, List<string>>();
-            using (FileStream fs = File.OpenRead(file))
-            using (BinaryReader reader = new BinaryReader(fs))
-            {
-                int count = reader.ReadInt32();
-                for(int i = 0; i < 0; i++)
-                {
-                    string tmepVal = "";
-                    List<string> tempList = new List<string>();
-                    string key = reader.ReadString();
-                    char[] value = reader.ReadChars(count);
-                    foreach(char c in value)
-                    {
-                        tmepVal += c;                     
-                    }
-                    tempList.Add(tmepVal);
-                    contacts.Add(key, tempList);
-                }
-                this.instance.contacts = Tempcontacts;
-            }
+            //Dictionary<string, List<string>> Tempcontacts = new Dictionary<string, List<string>>();
+            //using (FileStream fs = File.OpenRead(file))
+            //using (BinaryReader reader = new BinaryReader(fs))
+            //{
+            //    int count = reader.ReadInt32();
+            //    for(int i = 0; i < count; i++)
+            //    {
+            //        string tmepVal = "";
+            //        List<string> tempList = new List<string>();
+            //        string key = reader.ReadString();
+            //        char[] value = reader.ReadChars(count);
+            //        foreach(char c in value)
+            //        {
+            //            tmepVal += c;                     
+            //        }
+            //        tempList.Add(tmepVal);
+            //        Tempcontacts.Add(key, tempList);
+            //    }
+            //    instance.contacts = Tempcontacts;
+            return instance.contacts;
+            //}
         }
 
         public Dictionary<string, List<string>> GetContacts()
