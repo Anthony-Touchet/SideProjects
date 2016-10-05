@@ -20,7 +20,7 @@ namespace WinFormsLoggingSystem
         {
             InitializeComponent();
             if(File.Exists(Environment.CurrentDirectory + "/Contacts.xml"))
-                info.instance.contacts = info.instance.ReadContacts(Environment.CurrentDirectory + "/Contacts.xml");
+                info.instance.contacts = info.instance.ReadContacts();
             Open_Log(null, null);
         }
 
@@ -30,7 +30,6 @@ namespace WinFormsLoggingSystem
             File.WriteAllText(path, LogBox.Text);
             MessageBox.Show("File has been Saved!");
         }
-
 
         private void LoadLog(object sender, EventArgs e)
         {
@@ -82,7 +81,7 @@ namespace WinFormsLoggingSystem
             else
             {
                 MessageBox.Show("Contact Saved!");
-                info.instance.SaveContacts(info.instance.GetContacts(), Environment.CurrentDirectory + "/Contacts.xml");
+                info.instance.SaveContacts();
             }        
         }
 
@@ -91,7 +90,7 @@ namespace WinFormsLoggingSystem
             if (info.instance.AddNumer(contactName.Text, contactNumber.Text))
             {
                 MessageBox.Show("Contact now has this number as well.");
-                info.instance.SaveContacts(info.instance.GetContacts(), Environment.CurrentDirectory + "/Contacts.xml");
+                info.instance.SaveContacts();
             }
                 
             else
